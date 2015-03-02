@@ -11,10 +11,10 @@
         <input type="checkbox"/>
       </td>
       <td style="width:75%">
-        <a href="#">{{list.name}}</a>
+        <a href="" ng-click="view(list)">{{list.name}}</a>
       </td>
       <td style="width:20%">
-        <a class='glyphicon glyphicon-trash' ng-click="delete({{list}})"></a>
+        <a class='glyphicon glyphicon-trash' ng-click="delete(list.id)"></a>
       </td>
     </tr>
   </table>

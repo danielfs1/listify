@@ -23,7 +23,7 @@ angular
     'firebase',
     'oauth'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -37,6 +37,10 @@ angular
         templateUrl: 'views/lists.html',
         controller: 'ListsCtrl'
       })
+      .when('/list/:id', {
+        templateUrl: 'views/list.html',
+        controller: 'ListCtrl'
+      })
       .when('/access_token=:access_token', {
         template: '',
         controller: function ($location, AccessToken) {
@@ -47,8 +51,9 @@ angular
         }
       })
       .otherwise({
-        redirectTo: '/about'
+        redirectTo: '/'
       });
+    $locationProvider.html5Mode(true);
   }).run(function($rootScope, $firebase) {
 
   });

@@ -8,7 +8,7 @@
  * Controller of the listifyApp
  */
 angular.module('listifyApp')
-  .controller('ListsCtrl', function ($scope, $rootScope, HelperService, $firebase, List) {
+  .controller('ListsCtrl', function ($scope, $rootScope, HelperService, $firebase, List, $location) {
     HelperService.setActiveLink("listsClass");
 
     var ref = new Firebase("https://listify-keystone.firebaseio.com/lists");
@@ -17,10 +17,7 @@ angular.module('listifyApp')
 
     $rootScope.lists = sync.$asArray();
 
-    //console.log($scope.lists);
-
     $scope.createNew = function() {
-      // console.log('createnew');
       $rootScope.lists.$add(new List($scope.newListName));
       $scope.newListName = "";
     }
@@ -30,6 +27,10 @@ angular.module('listifyApp')
       if(keyEvent.which == 13) {
         $scope.createNew();
       }
+    }
+
+    $scope.view = function(list) {
+      $location.path('/list/' + list.$id);
     }
 
     $scope.delete = function(list) {
