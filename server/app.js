@@ -5,8 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+//var routes = require('./routes/index');
+//var users = require('./routes/users');
+var lists = require('./routes/lists');
+var list = require('./routes/list');
+
+var monk = require('monk');
+var db = monk('localhost:27017/listify');
 
 var app = express();
 
@@ -29,6 +34,7 @@ if (app.get('env') === 'development') {
 
     // Error Handling
     app.use(function(err, req, res, next) {
+        console.log(err.message);
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -55,5 +61,8 @@ if (app.get('env') === 'production') {
         });
     });
 }
+
+app.use('/lists', lists);
+app.use('/list', list);
 
 module.exports = app;

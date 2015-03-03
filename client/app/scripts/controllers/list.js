@@ -8,13 +8,16 @@
  * Controller of the listifyApp
  */
 angular.module('listifyApp')
-  .controller('ListCtrl', function ($scope, $routeParams, $firebase) {
-    var ref = new Firebase("https://listify-keystone.firebaseio.com/lists/" + $routeParams.id);
+  .controller('ListCtrl', function ($scope, $routeParams, $http) {
 
-    var sync = $firebase(ref);
+    var request = $http.get('/lists');
 
-    $scope.list = sync.$asObject();
+    request.success(function (data) {
 
+    });
 
+    request.error(function (data) {
+
+    });
 
   });

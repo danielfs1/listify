@@ -20,7 +20,6 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'firebase',
     'oauth'
   ])
   .config(function ($routeProvider, $locationProvider) {
@@ -54,6 +53,6 @@ angular
         redirectTo: '/'
       });
     $locationProvider.html5Mode(true);
-  }).run(function($rootScope, $firebase) {
+  }).run(function($rootScope) {
 
   });

@@ -8,18 +8,26 @@
  * Controller of the listifyApp
  */
 angular.module('listifyApp')
-  .controller('ListsCtrl', function ($scope, $rootScope, HelperService, $firebase, List, $location) {
+  .controller('ListsCtrl', function ($scope, $rootScope, HelperService, $http, List, $location) {
     HelperService.setActiveLink("listsClass");
 
-    var ref = new Firebase("https://listify-keystone.firebaseio.com/lists");
+    var response = $http.get('/lists');
 
-    var sync = $firebase(ref);
+    response.success(function (data) {
+      $rootScope.lists = data.lists;
+      console.log(data);
+    });
 
-    $rootScope.lists = sync.$asArray();
+    response.error(function (data) {
+      console.log("error");
+    });
 
     $scope.createNew = function() {
-      $rootScope.lists.$add(new List($scope.newListName));
-      $scope.newListName = "";
+      var response = $http.post('/list/', '{"name" : "' + $scope.newName + '"}');
+      response.success(function (data) {
+        $rootScope.lists = data.lists;
+      });
+      $scope.newName = "";
     }
 
     // Save on enter press
@@ -30,11 +38,14 @@ angular.module('listifyApp')
     }
 
     $scope.view = function(list) {
-      $location.path('/list/' + list.$id);
+      $location.path('/list/' + list._id);
     }
 
-    $scope.delete = function(list) {
-      sync.$remove(this.list.$id);
+    $scope.delete = function(listId) {
+      var response = $http.delete('/list/' + listId);
+      response.success(function (data) {
+        $rootScope.lists = data.lists;
+      });
     }
 
   });

@@ -14,13 +14,13 @@
         <a href="" ng-click="view(list)">{{list.name}}</a>
       </td>
       <td style="width:20%">
-        <a class='glyphicon glyphicon-trash' ng-click="delete(list.id)"></a>
+        <a class='glyphicon glyphicon-trash' ng-click="delete(list._id)"></a>
       </td>
     </tr>
   </table>
 
 </br>
   <label>Add a new list: </label>
-  <input type='text' class="form-control" ng-keypress='onEnter($event)' ng-model='newListName' placeholder="List Name" style="width:200px;display:block;"/>
+  <input type='text' class="form-control" ng-keypress='onEnter($event)' ng-model='newName' placeholder="List Name" style="width:200px;display:block;"/>
   <!-- <button class="btn" ng-click='createNew()'>+</button> -->
 </br>
