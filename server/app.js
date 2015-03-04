@@ -10,9 +10,6 @@ var bodyParser = require('body-parser');
 var lists = require('./routes/lists');
 var list = require('./routes/list');
 
-var monk = require('monk');
-var db = monk('localhost:27017/listify');
-
 var app = express();
 
 // uncomment after placing your favicon in /public

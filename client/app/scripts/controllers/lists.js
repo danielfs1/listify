@@ -37,8 +37,8 @@ angular.module('listifyApp')
       }
     }
 
-    $scope.view = function(list) {
-      $location.path('/list/' + list._id);
+    $scope.view = function(listId) {
+      $location.path('/list/' + listId);
     }
 
     $scope.delete = function(listId) {

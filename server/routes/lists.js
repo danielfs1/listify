@@ -3,18 +3,21 @@
  */
 
 var express = require('express');
-var monk = require('monk');
-var db = monk('localhost:27017/listify');
+var db = require('../database');
+var Lists = db.lists;
 var router = express.Router();
 
 router.get('/', function (req, res) {
 
-    var lists = db.get('lists');
-    lists.find({}, {limit:20}, function(e, docs) {
-       res.json({
-           'lists' : docs
-       });
+    // Return lists
+    Lists.find({}, function(err, lists) {
+        if(lists) {
+            res.json({
+                'lists': lists
+            });
+        }
     });
+
 });
 
 module.exports = router;

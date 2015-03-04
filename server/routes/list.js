@@ -4,32 +4,63 @@
 
 var express = require('express');
 var router = express.Router();
-var monk = require('monk');
-var db = monk('localhost:27017/listify');
+var db = require('../database');
+var Lists = db.lists;
 
 router.delete('/:id', function (req, res) {
-    var id = req.param('id');
+    var id = req.params.id;
+    Lists.findByIdAndRemove(id, function (err, list) {});
 
-    var lists = db.get('lists');
-    lists.remove({ _id : id });
-
-    lists.find({}, {limit:20}, function(e, docs) {
-        res.json({
-            'lists' : docs
-        });
+    // Return lists
+    Lists.find({}, function(err, lists) {
+       if(lists) {
+           res.json({
+              'lists': lists
+           });
+       }
     });
+});
 
+router.get('/:id', function (req, res) {
+    var id = req.params.id;
+
+    Lists.findOne({
+        '_id': id
+    }, function (err, list) {
+        console.log(list);
+        if(err) {
+            console.log(err);
+        }
+        if(list) {
+            res.json({
+               'list': list
+            });
+        }
+    });
 });
 
 router.post('/', function(req, res) {
-    var lists = db.get('lists');
-    lists.insert({ name : req.body.name });
-    lists = db.get('lists');
-    lists.find({}, {limit:20}, function(e, docs) {
-        res.json({
-            'lists' : docs
-        });
+
+    var newList = new Lists({
+        name: req.body.name
     });
+
+    newList.save(function(err) {
+        if(err) {
+            console.log(err);
+        } else {
+            // Return Lists
+            Lists.find({}, function (err, lists) {
+                console.log(lists);
+                if(lists) {
+                    res.json({
+                        'lists': lists
+                    })
+                }
+            });
+        }
+    });
+
 });
 
 module.exports = router;
