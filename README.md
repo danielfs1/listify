@@ -1,7 +1,7 @@
 # listify
 
-## Downloading dependecies
-----------------------
+## Downloading dependencies
+
 ### Client
 - `cd client`
 - `bower install`
@@ -12,7 +12,7 @@
 - install mongodb
 
 ## Running
----------
+
 ### Client
 - `cd client`
 - `grunt serve`
