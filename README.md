@@ -1,16 +1,25 @@
 # listify
 
-Downloading dependecies
+## Downloading dependecies
 ----------------------
-cd into 'client'
-run 'bower install'
-cd into 'server'
-run 'npm install'
+### Client
+- `cd client`
+- run `bower install`
 
-Running
+### Server
+- `cd server`
+- run `npm install`
+- install mongodb`
+
+## Running
 ---------
-cd into 'client'
-run 'grunt serve' (close the window that opens)
+### Client
+- `cd client`
+- run `grunt serve`
+- close the window that opens
 
-cd into 'server'
-run 'npm test'
+### Server
+- `sudo mongod`
+- cd into 'server'
+- run 'npm test'
+- open localhost:3000 in a browser
