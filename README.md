@@ -21,5 +21,5 @@
 ### Server
 - `sudo mongod`
 - `cd server`
-- 'npm test'
+- `npm test`
 - open localhost:3000 in a browser
