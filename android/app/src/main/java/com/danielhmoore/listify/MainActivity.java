@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.danielhmoore.listify.models.ListifyList;
+import com.danielhmoore.listify.models.ListifyLists;
+
 import java.util.List;
 
 import retrofit.RestAdapter;
@@ -20,13 +23,17 @@ public class MainActivity extends Activity implements ListsFragment.OnFragmentIn
         setContentView(R.layout.activity_main);
 
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint("http://localhost:9000")
+                .setEndpoint("http://10.10.10.163:3000")
                 .build();
 
-        ListifyService service = restAdapter.create(ListifyService.class);
+        final ListifyService service = restAdapter.create(ListifyService.class);
 
-        List<ListifyList> list = service.getList();
-        list.size();
+        new Thread(new Runnable() {
+            public void run() {
+                ListifyLists list = service.getList();
+                list.getLists();
+            }
+        }).start();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.danielhmoore.listify.dummy;
+package com.danielhmoore.listify.models;
 
 import java.util.ArrayList;
 import java.util.HashMap;

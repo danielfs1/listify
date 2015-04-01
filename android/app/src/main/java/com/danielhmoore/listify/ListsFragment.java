@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
-import com.danielhmoore.listify.dummy.DummyContent;
+import com.danielhmoore.listify.models.DummyContent;
 
 /**
  * A fragment representing a list of Items.

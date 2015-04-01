@@ -1,5 +1,8 @@
 package com.danielhmoore.listify;
 
+import com.danielhmoore.listify.models.ListifyList;
+import com.danielhmoore.listify.models.ListifyLists;
+
 import java.util.List;
 
 import retrofit.http.GET;
@@ -9,5 +12,5 @@ import retrofit.http.GET;
  */
 public interface ListifyService {
     @GET("/lists/")
-    List<ListifyList> getList();
+    ListifyLists getList();
 }
