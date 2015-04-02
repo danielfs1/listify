@@ -1,13 +1,17 @@
 package com.danielhmoore.listify;
 
 import android.app.Activity;
+import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.SimpleAdapter;
 
 import com.danielhmoore.listify.models.ListifyList;
 import com.danielhmoore.listify.models.ListifyLists;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.RestAdapter;
@@ -21,6 +25,13 @@ public class MainActivity extends Activity implements ListsFragment.OnFragmentIn
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        listsFragment = (ListsFragment) getFragmentManager().findFragmentById(R.id.fragment);
+
+        final List<ListifyList> listArray = new ArrayList<ListifyList>();
+
+        final ListAdapter arrayAdapter = new ListAdapter(getApplicationContext(), listArray);
+
+        listsFragment.setListAdapter(arrayAdapter);
 
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint("http://10.10.10.163:3000")
@@ -31,6 +42,7 @@ public class MainActivity extends Activity implements ListsFragment.OnFragmentIn
         new Thread(new Runnable() {
             public void run() {
                 ListifyLists list = service.getList();
+                listArray.addAll(list.getLists());
                 list.getLists();
             }
         }).start();
