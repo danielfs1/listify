@@ -20,4 +20,19 @@ angular.module('listifyApp')
       console.log(data);
     });
 
+    $scope.addItem = function() {
+      var response = $http.post('/item/', '{"listId" : "' + $routeParams.id + '", "name" : "' + $scope.newName + '"}');
+      response.success(function (data) {
+        console.log(data);
+      });
+      $scope.newName = "";
+    }
+
+    // Save on enter press
+    $scope.onEnter = function (keyEvent) {
+      if(keyEvent.which == 13) {
+        $scope.addItem();
+      }
+    }
+
   });

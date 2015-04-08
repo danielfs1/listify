@@ -3,6 +3,7 @@
  */
 
 var mongoose = require('mongoose');
+var ItemModel = require('./schemas/item');
 var ListModel = require('./schemas/lists');
 
 var devDb = "mongodb://localhost/listify";
@@ -18,3 +19,4 @@ db.once('open', function callback() {
 });
 
 exports.lists = ListModel;
+exports.item = ItemModel;

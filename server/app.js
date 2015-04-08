@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 //var users = require('./routes/users');
 var lists = require('./routes/lists');
 var list = require('./routes/list');
+var item = require('./routes/item');
 
 var app = express();
 
@@ -61,5 +62,6 @@ if (app.get('env') === 'production') {
 
 app.use('/lists', lists);
 app.use('/list', list);
+app.use('/item', item);
 
 module.exports = app;
