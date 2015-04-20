@@ -1,12 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name listifyApp.controller:ListCtrl
- * @description
- * # ListCtrl
- * Controller of the listifyApp
- */
 angular.module('listifyApp')
   .controller('ListCtrl', function ($scope, $routeParams, $http) {
 
@@ -14,6 +7,8 @@ angular.module('listifyApp')
 
     request.success(function (data) {
       $scope.list = data.list;
+      $scope.items = data.items;
+      console.log($scope.items);
     });
 
     request.error(function (data) {
@@ -26,6 +21,13 @@ angular.module('listifyApp')
         console.log(data);
       });
       $scope.newName = "";
+    }
+
+    $scope.delete = function(itemId) {
+      var response = $http.delete('/item/' + itemId);
+      response.success(function (data) {
+        //$rootScope.lists = data.lists;
+      });
     }
 
     // Save on enter press
