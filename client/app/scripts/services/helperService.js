@@ -16,4 +16,8 @@ angular.module('listifyApp')
       $rootScope.listsClass = "";
       $rootScope[className] = "active";
     };
+
+    // this.getListCount = function() {
+    //    console.log(ListsCtrl.getItems().size());
+    // };
   });

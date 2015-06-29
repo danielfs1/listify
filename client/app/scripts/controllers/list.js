@@ -3,22 +3,24 @@
 angular.module('listifyApp')
   .controller('ListCtrl', function ($scope, $routeParams, $http) {
 
-    var request = $http.get('/list/' + $routeParams.id);
+    $scope.getItems = function() {
+      var request = $http.get('/list/' + $routeParams.id);
+      request.success(function (data) {
+        $scope.list = data.list;
+        $scope.items = data.items;
+        console.log($scope.items);
+      });
 
-    request.success(function (data) {
-      $scope.list = data.list;
-      $scope.items = data.items;
-      console.log($scope.items);
-    });
-
-    request.error(function (data) {
-      console.log(data);
-    });
+      request.error(function (data) {
+        console.log(data);
+      });
+    }
 
     $scope.addItem = function() {
       var response = $http.post('/item/', '{"listId" : "' + $routeParams.id + '", "name" : "' + $scope.newName + '"}');
       response.success(function (data) {
         console.log(data);
+        $scope.getItems();
       });
       $scope.newName = "";
     }
@@ -26,7 +28,7 @@ angular.module('listifyApp')
     $scope.delete = function(itemId) {
       var response = $http.delete('/item/' + itemId);
       response.success(function (data) {
-        //$rootScope.lists = data.lists;
+        $scope.getItems();
       });
     }
 
@@ -36,5 +38,8 @@ angular.module('listifyApp')
         $scope.addItem();
       }
     }
+
+    // On page load
+    $scope.getItems();
 
   });
