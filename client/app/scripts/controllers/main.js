@@ -10,7 +10,7 @@
 angular.module('listifyApp')
   .controller('MainCtrl', function ($scope, $rootScope, HelperService, Profile, $http) {
     HelperService.setActiveLink("homeClass");
-    // HelperService.getListCount();
+    HelperService.getListCount();
 
     $scope.$on('oauth:login', function(event, token) {
       console.log('Authorized third party app with token', token.access_token);

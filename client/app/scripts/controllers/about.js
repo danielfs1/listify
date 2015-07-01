@@ -12,11 +12,4 @@ angular.module('listifyApp')
 
     HelperService.setActiveLink("aboutClass");
 
-    $scope.currentList = new List("test");
-
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
   });
