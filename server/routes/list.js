@@ -8,7 +8,7 @@ router.delete('/:id', function (req, res) {
     var id = req.params.id;
     List.findByIdAndRemove(id, function (err, list) {
       res.json({
-         'lists': lists
+         'lists': list
       });
     });
 });
@@ -41,7 +41,8 @@ router.get('/:id', function (req, res) {
 
 router.post('/', function(req, res) {
     var newList = new List({
-        name: req.body.name
+        name: req.body.name,
+        update: new Date
     });
 
     newList.save(function(err) {

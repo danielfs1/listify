@@ -8,7 +8,8 @@ var Schema = mongoose.Schema;
 
 var listSchema = new Schema({
     name: { type: String, required: true },
-    email: { type: String, required: false }
+    created: { type: Date, default: Date.now },
+    updated: { type: Date, default: Date.now }
 });
 
 var List = mongoose.model('List', listSchema);

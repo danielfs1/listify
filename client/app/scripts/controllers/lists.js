@@ -14,7 +14,7 @@ angular.module('listifyApp')
     $scope.createNew = function() {
       var response = $http.post('/list/', '{"name" : "' + $scope.newName + '"}');
       response.success(function (data) {
-        $rootScope.lists = data.lists;
+        HelperService.getLists();
       });
       $scope.newName = "";
     }
@@ -33,7 +33,7 @@ angular.module('listifyApp')
     $scope.delete = function(listId) {
       var response = $http.delete('/list/' + listId);
       response.success(function (data) {
-        $rootScope.lists = data.lists;
+        HelperService.getLists();
       });
     }
 

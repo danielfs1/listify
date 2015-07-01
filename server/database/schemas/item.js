@@ -4,6 +4,8 @@ var Schema = mongoose.Schema;
 
 var itemSchema = new Schema({
     listId: { type: String, required: true },
+    created: { type: Date, default: Date.now },
+    updated: { type: Date, default: Date.now },
     name: { type: String, required: true }
 });
 

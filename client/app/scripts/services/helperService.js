@@ -17,7 +17,7 @@ angular.module('listifyApp')
       $rootScope[className] = "active";
     };
 
-    this.getListCount = function() {
+    this.getLists = function() {
       var response = $http.get('/lists');
 
       response.success(function (data) {
@@ -30,7 +30,4 @@ angular.module('listifyApp')
       });
     }
 
-    // this.getListCount = function() {
-    //    console.log(ListsCtrl.getItems().size());
-    // };
   });
