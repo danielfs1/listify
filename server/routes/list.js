@@ -6,11 +6,19 @@ var Item = db.item;
 
 router.delete('/:id', function (req, res) {
     var id = req.params.id;
-    List.findByIdAndRemove(id, function (err, list) {
+    List.findByIdAndRemove(id, function (err) {
       res.json({
-         'lists': list
+         'err': err
       });
     });
+});
+
+router.get('/', function (req, res) {
+  List.find({}, function(err, lists) {
+      if(lists) {
+          res.json(lists);
+      }
+  });
 });
 
 router.get('/:id', function (req, res) {

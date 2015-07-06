@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 
 //var routes = require('./routes/index');
 //var users = require('./routes/users');
-var lists = require('./routes/lists');
 var list = require('./routes/list');
 var item = require('./routes/item');
 
@@ -60,7 +59,6 @@ if (app.get('env') === 'production') {
     });
 }
 
-app.use('/lists', lists);
 app.use('/list', list);
 app.use('/item', item);
 

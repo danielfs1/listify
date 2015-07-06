@@ -8,15 +8,16 @@
  * Controller of the listifyApp
  */
 angular.module('listifyApp')
-  .controller('ListsCtrl', function ($scope, $rootScope, HelperService, $http, List, $location) {
+  .controller('ListsCtrl', function ($scope, $rootScope, HelperService, ListService, $location) {
     HelperService.setActiveLink("listsClass");
+    $rootScope.lists = ListService.query();
 
     $scope.createNew = function() {
-      var response = $http.post('/list/', '{"name" : "' + $scope.newName + '"}');
-      response.success(function (data) {
-        HelperService.getLists();
+      var list = new ListService();
+      list.name = $scope.newName;
+      ListService.save(list, function(){
+        $rootScope.lists = ListService.query();
       });
-      $scope.newName = "";
     }
 
     // Save on enter press
@@ -31,9 +32,8 @@ angular.module('listifyApp')
     }
 
     $scope.delete = function(listId) {
-      var response = $http.delete('/list/' + listId);
-      response.success(function (data) {
-        HelperService.getLists();
+      ListService.delete({id: listId}, function() {
+        $rootScope.lists = ListService.query();
       });
     }
 
