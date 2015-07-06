@@ -8,7 +8,7 @@
  * Service in the listifyApp.
  */
 angular.module('listifyApp')
-  .service('HelperService', function HelperService($http, $rootScope) {
+  .service('HelperService', function HelperService($http, $rootScope, ListService) {
     this.setActiveLink = function(className) {
       $rootScope.aboutClass = "";
       $rootScope.homeClass = "";
@@ -18,15 +18,8 @@ angular.module('listifyApp')
     };
 
     this.getLists = function() {
-      var response = $http.get('/lists');
-
-      response.success(function (data) {
-        $rootScope.lists = data.lists;
-        console.log(data);
-      });
-
-      response.error(function (data) {
-        console.log("error");
+      var lists = ListService.query(function() {
+        $rootScope.lists = lists;
       });
     }
 

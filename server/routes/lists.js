@@ -12,9 +12,7 @@ router.get('/', function (req, res) {
     // Return lists
     Lists.find({}, function(err, lists) {
         if(lists) {
-            res.json({
-                'lists': lists
-            });
+            res.json(lists);
         }
     });
 
